@@ -1,20 +1,15 @@
 import os
-import time
 import glob
-
 import pandas as pd
 from dotenv import load_dotenv
 from selenium import webdriver
 from selenium.webdriver.common.by import By
 from selenium.webdriver.common.keys import Keys
-from selenium.webdriver.support.ui import WebDriverWait
-from webdriver_manager.chrome import ChromeDriverManager
 from selenium.webdriver.common.action_chains import ActionChains
 from selenium.webdriver.support import expected_conditions as EC
 import time
 from selenium.webdriver.support.ui import WebDriverWait
 from webdriver_manager.chrome import ChromeDriverManager
-import datetime
 
 load_dotenv()
 user_name = os.environ.get('USERNAME')
@@ -72,7 +67,7 @@ WebDriverWait(driver, 10).until(EC.presence_of_element_located((By.XPATH, custom
 date_input_field = WebDriverWait(driver, 10).until(EC.presence_of_element_located((By.XPATH, date_input)))
 date_input_field.send_keys(Keys.CONTROL + "a")
 date_input_field.send_keys(Keys.DELETE)
-date_input_field.send_keys('2023/02/16 00:00 - 2023/02/17 23:59')
+date_input_field.send_keys('2023/02/06 00:00 - 2023/02/12 23:59')
 time.sleep(3)
 
 WebDriverWait(driver, 10).until(EC.presence_of_element_located((By.XPATH, used_filter))).click()
@@ -98,30 +93,22 @@ less_input.send_keys(10)
 WebDriverWait(driver, 10).until(EC.presence_of_element_located((By.XPATH, filter_button))).click()
 WebDriverWait(driver, 10).until(EC.presence_of_element_located((By.XPATH, show_result))).click()
 
-
 cell_button = WebDriverWait(driver, 20).until(EC.presence_of_element_located((By.XPATH, cell)))
 actions = ActionChains(driver)
 actions.context_click(cell_button).perform()
 WebDriverWait(driver, 20).until(EC.presence_of_element_located((By.XPATH, export_button))).click()
-
+time.sleep(20)
 
 status = True
 while status:
-    files_path = os.path.join(folder_path, '*')
+    files_path = os.path.join(folder_path, '*csv')
     files = sorted(glob.iglob(files_path), key=os.path.getctime, reverse=True)
     last_file_new = files[0]
     if last_file_new != last_file:
         status = False
+WebDriverWait(driver, 20).until(EC.presence_of_element_located((By.XPATH,
+                                                                '/html/body/app-root/app-layouts/app-platform-layout/mat-sidenav-container/mat-sidenav-content/div/section/div[2]/app-report-by-free-spins/div/div[2]/div[1]/mat-sidenav-container/mat-sidenav-content/div/ag-grid-angular/div/div[1]/div/div[1]/div[2]/div/div/div[12]/header-cell/div/div[2]/button/span/mat-icon'))).click()
+WebDriverWait(driver, 20).until(EC.presence_of_element_located((By.XPATH, clear_button))).click()
 
 frame = pd.read_csv(last_file_new, skiprows=2)
 print(frame.head())
-
-
-
-
-
-
-
-
-
-
