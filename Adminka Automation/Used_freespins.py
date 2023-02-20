@@ -13,31 +13,31 @@ from webdriver_manager.chrome import ChromeDriverManager
 from datetime import datetime
 
 load_dotenv()
-user_name = os.environ.get('USERNAME')
-password = os.environ.get('PASSWORD')
-main_link = os.environ.get('MAIN_PAGE')
-login_path = os.environ.get('LOGIN_PATH')
-password_path = os.environ.get('PASSWORD_PATH')
-login_button = os.environ.get('LOGIN_BUTTON')
-reports_button = os.environ.get('REPORTS_BUTTON')
-internet_players_button = os.environ.get('INTERNET_PLAYERS_BUTTON')
-report_by_freespins = os.environ.get('REPORT_BY_FREE_SPINS')
-partner_name = os.environ.get('PARTNER_NAME')
-totogaming_option = os.environ.get('TOTOGAMING')
-background_exit = os.environ.get('BACKGROUND_EXIT')
-date_select = os.environ.get('DATE_SLICER')
-custom = os.environ.get('CUSTOM_SELECT')
-date_input = os.environ.get('DATETIME_INPUT')
-show_result = os.environ.get('show_result')
-cell = os.environ.get('ARBITRARY_CELL')
-export_button = os.environ.get('EXPORT_BUTTON')
-unused_filter_open = os.environ.get('UNUSED_FREESPIN_FILTER_1')
-unused_freespin_is_equal = os.environ.get('UNUSED_FREESPIN_IS_EQUAL')
-unused_freespin_is_less_or_equal = os.environ.get('UNUSED_FREESPIN_IS_LESS_OR_EQUAL')
-less_or_equal_input = os.environ.get('UNUSED_FREESPIN_IS_LESS_OR_EQUAL_INPUT')
-filter_less_or_equal = os.environ.get('UNUSED_FREESPIN_FILTER_2')
-open_less_or_equal_filter = os.environ.get('UNUSED_FREESPIN_CLEAR_FILTER_OPEN')
-clear_filter = os.environ.get('UNUSED_FREESPIN_CLEAR_FILTER')
+user_name = 'narek.meloyan'
+password = '!QAZ2wsx#EDC'
+main_link = 'https://admindigitainnew.totogaming.am/#/login'
+login_path = '//*[@id="mat-input-0"]'
+password_path = '//*[@id="mat-input-1"]'
+login_button = '/html/body/app-root/app-layouts/app-login-layout/div[2]/app-login/mat-card/div[2]/form/div[4]/button/span'
+reports_button = '/html/body/app-root/app-layouts/app-platform-layout/mat-sidenav-container/mat-sidenav/div/app-navigation-menu/ul/div[16]/a/span[2]'
+internet_players_button = '/html/body/app-root/app-layouts/app-platform-layout/mat-sidenav-container/mat-sidenav/div/app-navigation-menu/ul/div[16]/ul/div[4]/a/span[2]'
+report_by_freespins = '/html/body/app-root/app-layouts/app-platform-layout/mat-sidenav-container/mat-sidenav/div/app-navigation-menu/ul/div[16]/ul/div[4]/ul/div[2]/a/span[2]'
+partner_name = '/html/body/app-root/app-layouts/app-platform-layout/mat-sidenav-container/mat-sidenav-content/div/section/div[2]/app-report-by-free-spins/div/div[1]/app-filter/div/div[2]/mat-card/mat-card-content/form/div[1]/mat-form-field/div/div[1]/div/mat-select/div/div[1]/span'
+totogaming_option = '/html/body/div[4]/div[2]/div/div/div/mat-option[2]/span'
+background_exit = '/html/body/div[4]/div[1]'
+date_select = '/html/body/app-root/app-layouts/app-platform-layout/mat-sidenav-container/mat-sidenav-content/div/section/div[2]/app-report-by-free-spins/div/div[1]/app-filter/div/div[2]/mat-card/mat-card-content/form/div[2]/mat-form-field/div/div[1]/div'
+custom = '/html/body/div[4]/div[2]/div/div/div/mat-option[1]/span'
+date_input = '//*[@id="ej2-datetimepicker_0_input"]'
+show_result = '/html/body/app-root/app-layouts/app-platform-layout/mat-sidenav-container/mat-sidenav-content/div/section/div[2]/app-report-by-free-spins/div/div[1]/app-filter/div/div[2]/div/button[2]/span'
+cell = '/html/body/app-root/app-layouts/app-platform-layout/mat-sidenav-container/mat-sidenav-content/div/section/div[2]/app-report-by-free-spins/div/div[2]/div[1]/mat-sidenav-container/mat-sidenav-content/div/ag-grid-angular/div/div[1]/div/div[3]/div[2]/div/div/div[1]/div[1]/number-cell/div'
+export_button = '/html/body/div[4]/div/div/context-menu-content/div/ul/li[1]/a'
+unused_filter_open = '/html/body/app-root/app-layouts/app-platform-layout/mat-sidenav-container/mat-sidenav-content/div/section/div[2]/app-report-by-free-spins/div/div[2]/div[1]/mat-sidenav-container/mat-sidenav-content/div/ag-grid-angular/div/div[1]/div/div[1]/div[2]/div/div/div[13]/header-cell/div/div[2]/button/span/mat-icon'
+unused_freespin_is_equal = '/html/body/app-root/app-layouts/app-platform-layout/mat-sidenav-container/mat-sidenav-content/div/section/div[2]/app-report-by-free-spins/div/div[2]/div[1]/mat-sidenav-container/mat-sidenav-content/div/ag-grid-angular/div/div[4]/div/div/number-filter-cell/mat-card/mat-card-content/mat-form-field[1]/div/div[1]/div/mat-select/div/div[1]/span/span'
+unused_freespin_is_less_or_equal = '/html/body/div[4]/div[2]/div/div/div/mat-option[4]/span'
+less_or_equal_input = '/html/body/app-root/app-layouts/app-platform-layout/mat-sidenav-container/mat-sidenav-content/div/section/div[2]/app-report-by-free-spins/div/div[2]/div[1]/mat-sidenav-container/mat-sidenav-content/div/ag-grid-angular/div/div[4]/div/div/number-filter-cell/mat-card/mat-card-content/div[1]/mat-form-field/div/div[1]/div/input'
+filter_less_or_equal = '/html/body/app-root/app-layouts/app-platform-layout/mat-sidenav-container/mat-sidenav-content/div/section/div[2]/app-report-by-free-spins/div/div[2]/div[1]/mat-sidenav-container/mat-sidenav-content/div/ag-grid-angular/div/div[4]/div/div/number-filter-cell/mat-card/mat-card-actions/button[2]/span'
+open_less_or_equal_filter = '/html/body/app-root/app-layouts/app-platform-layout/mat-sidenav-container/mat-sidenav-content/div/section/div[2]/app-report-by-free-spins/div/div[2]/div[1]/mat-sidenav-container/mat-sidenav-content/div/ag-grid-angular/div/div[1]/div/div[1]/div[2]/div/div/div[13]/header-cell/div/div[2]/button/span/mat-icon'
+clear_filter = '/html/body/app-root/app-layouts/app-platform-layout/mat-sidenav-container/mat-sidenav-content/div/section/div[2]/app-report-by-free-spins/div/div[2]/div[1]/mat-sidenav-container/mat-sidenav-content/div/ag-grid-angular/div/div[4]/div/div/number-filter-cell/mat-card/mat-card-actions/button[1]/span'
 
 options = webdriver.ChromeOptions()
 options.add_experimental_option('excludeSwitches', ['enable-logging'])
@@ -111,21 +111,52 @@ csv_files = glob.glob(os.path.join(files_path, "*.csv"))
 for f in csv_files:
     # read the csv file
     df_1 = pd.read_csv(f, nrows=1)
-    from_date = df_1.index[0]
+    from_date = df_1.iloc[0, 0]
     from_date = from_date[10:26]
     from_date = datetime.strptime(from_date, "%d.%m.%Y %H:%M")
-    until_date = df_1.iloc[0, 0]
+    day = from_date.strftime('%m-%d')
+    from_date = from_date.strftime("%Y/%m/%d %H:%M")
+
+    until_date = df_1.iloc[0, 1]
     until_date = until_date[11:27]
     until_date = datetime.strptime(until_date, "%d.%m.%Y %H:%M")
-    day = from_date.strftime('%m-%d')
-    from_date = str(from_date).replace('-', '/')
-    until_date = str(until_date).replace('-', '/')
-    date = from_date[:len(from_date) - 3] + ' - ' + until_date[:len(until_date)-3]
-    print(date)
+    until_date = until_date.strftime("%Y/%m/%d %H:%M")
+    date = from_date + ' - ' + until_date
+
     df_2 = pd.read_csv(f, skiprows=2)
     max_num = max(df_2['FreeSpinCount'])
+
     statuses = load_data(date, max_num)
+    df_2 = df_2[['Id', 'PlayerId', 'UniqueId', 'FreeSpinName', 'Original Provider', 'ProductName', 'FreeSpinCount', 'UsedFreeSpinCount', 'UnusedFreeSpinCount', 'StartTime', 'ProvisionDate', "Campaign ID"]]
+    statuses = statuses[['Id', 'PlayerFreeSpinStatus', 'UsedFreeSpinCount', 'UnusedFreeSpinCount', 'SumOfWin', 'LastUpdateTime']]
+
+
+    statuses['LastUpdateTime'] = statuses['LastUpdateTime'].str[:10]
+    statuses['LastUpdateTime'] = pd.to_datetime(statuses['LastUpdateTime'], format='%d.%m.%Y')
+    statuses['LastUpdateTime'] = statuses['LastUpdateTime'].dt.date
+
+
+
     final_frame = pd.merge(df_2, statuses, on='Id')
-    final_frame['Notif Date'] = from_date
-    print(final_frame)
-    final_frame.to_excel(f'Result_{day}.xlsx')
+    final_frame['Start Date'] = from_date
+    final_frame['Until Date'] = until_date
+    final_frame.to_excel(f'Z:/Daily Personal Campaigns/Unused Freespins - Artur B/reults from Narek/Result_{day}.xlsx', index=False)
+
+
+folder_path = "Z:/Daily Personal Campaigns/Unused Freespins - Artur B/reults from Narek/"
+
+# Get a list of all Excel files in the folder
+file_list = [f for f in os.listdir(folder_path) if f.endswith('.xlsx')]
+
+# Initialize an empty DataFrame to store the results
+all_data = pd.DataFrame()
+
+# Loop through each file and append it to the DataFrame
+for file in file_list:
+    # Read the Excel file into a DataFrame
+    data = pd.read_excel(os.path.join(folder_path, file))
+
+    # Append the data to the all_data DataFrame
+    all_data = all_data.append(data, ignore_index=True)
+
+# Print the final DataFrame
