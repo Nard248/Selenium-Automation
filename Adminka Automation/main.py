@@ -44,8 +44,10 @@ driver = webdriver.Chrome(ChromeDriverManager().install(), options=options)
 
 
 def load_data(date, max_unused=None):
+    if max_unused is None:
+        max_unused = 500
     folder_path = "C:/Users/narek.meloyan/Downloads/"
-    files_path = os.path.join(folder_path, '*')
+    files_path = os.path.join(folder_path, '*csv')
     files = sorted(glob.iglob(files_path), key=os.path.getctime, reverse=True)
     last_file = files[0]
 
@@ -68,50 +70,38 @@ def load_data(date, max_unused=None):
     date_input_field.send_keys(Keys.DELETE)
     date_input_field.send_keys(date)
 
-    WebDriverWait(driver, 10).until(EC.)
+    WebDriverWait(driver, 10).until(EC.presence_of_element_located((By.XPATH, unused_filter_open))).click()
+    WebDriverWait(driver, 10).until(EC.presence_of_element_located((By.XPATH, unused_freespin_is_equal))).click()
+    WebDriverWait(driver, 10).until(
+        EC.presence_of_element_located((By.XPATH, unused_freespin_is_less_or_equal))).click()
+    WebDriverWait(driver, 10).until(EC.presence_of_element_located((By.XPATH, less_or_equal_input))).send_keys(
+        max_unused)
+    WebDriverWait(driver, 10).until(EC.presence_of_element_located((By.XPATH, filter_less_or_equal))).click()
 
+    WebDriverWait(driver, 10).until(EC.presence_of_element_located((By.XPATH, show_result))).click()
+
+    cell_button = WebDriverWait(driver, 20).until(EC.presence_of_element_located((By.XPATH, cell)))
+    actions = ActionChains(driver)
+    actions.context_click(cell_button).perform()
+    WebDriverWait(driver, 20).until(EC.presence_of_element_located((By.XPATH, export_button))).click()
+    time.sleep(25)
+
+    status = True
+    while status:
+        files_path = os.path.join(folder_path, '*csv')
+        files = sorted(glob.iglob(files_path), key=os.path.getctime, reverse=True)
+        last_file_new = files[0]
+        if last_file_new != last_file:
+            status = False
+
+    frame = pd.read_csv(last_file_new, skiprows=2)
+
+    WebDriverWait(driver, 20).until(EC.presence_of_element_located((By.XPATH, open_less_or_equal_filter))).click()
+    WebDriverWait(driver, 20).until(EC.presence_of_element_located((By.XPATH, clear_filter))).click()
     driver.close()
+    return frame
 
-# WebDriverWait(driver, 10).until(EC.presence_of_element_located((By.XPATH, used_filter))).click()
-# time.sleep(1)
-# WebDriverWait(driver, 10).until(EC.presence_of_element_located((By.XPATH, used_filter_equal))).click()
-# time.sleep(1)
-# WebDriverWait(driver, 10).until(EC.presence_of_element_located((By.XPATH, used_filter_greater))).click()
-# time.sleep(1)
-#
-# greater_than_input = WebDriverWait(driver, 10).until(EC.presence_of_element_located((By.XPATH, used_filter_input_1)))
-# greater_than_input.send_keys(Keys.CONTROL + "a")
-# greater_than_input.send_keys(Keys.DELETE)
-# greater_than_input.send_keys(0)
-#
-# WebDriverWait(driver, 10).until(EC.presence_of_element_located((By.XPATH, used_select_filter))).click()
-# WebDriverWait(driver, 10).until(EC.presence_of_element_located((By.XPATH, used_select_less))).click()
-#
-# less_input = WebDriverWait(driver, 10).until(EC.presence_of_element_located((By.XPATH, used_less_input)))
-# less_input.send_keys(Keys.CONTROL + "a")
-# less_input.send_keys(Keys.DELETE)
-# less_input.send_keys(10)
-#
-# WebDriverWait(driver, 10).until(EC.presence_of_element_located((By.XPATH, filter_button))).click()
-# WebDriverWait(driver, 10).until(EC.presence_of_element_located((By.XPATH, show_result))).click()
-#
-# cell_button = WebDriverWait(driver, 20).until(EC.presence_of_element_located((By.XPATH, cell)))
-# actions = ActionChains(driver)
-# actions.context_click(cell_button).perform()
-# WebDriverWait(driver, 20).until(EC.presence_of_element_located((By.XPATH, export_button))).click()
-# time.sleep()
-#
-# status = True
-# while status:
-#     files_path = os.path.join(folder_path, '*csv')
-#     files = sorted(glob.iglob(files_path), key=os.path.getctime, reverse=True)
-#     last_file_new = files[0]
-#     if last_file_new != last_file:
-#         status = False
-# WebDriverWait(driver, 20).until(EC.presence_of_element_located((By.XPATH,
-#                                                                 '/html/body/app-root/app-layouts/app-platform-layout/mat-sidenav-container/mat-sidenav-content/div/section/div[2]/app-report-by-free-spins/div/div[2]/div[1]/mat-sidenav-container/mat-sidenav-content/div/ag-grid-angular/div/div[1]/div/div[1]/div[2]/div/div/div[12]/header-cell/div/div[2]/button/span/mat-icon'))).click()
-# WebDriverWait(driver, 20).until(EC.presence_of_element_located((By.XPATH, clear_button))).click()
-#
-# frame = pd.read_csv(last_file_new, skiprows=2)
-# print(frame.head())
-load_data('2023/02/06 00:00 - 2023/02/12 23:59')
+
+frame = load_data('2023/02/06 00:00 - 2023/02/12 23:59', 500)
+print(frame.head())
+print(frame.shape)
